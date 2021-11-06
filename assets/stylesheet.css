@@ -1,0 +1,22 @@
+
+header {
+    display:flex;
+    justify-content: space-between;
+}
+
+.introContainer {
+    text-align: center;
+    visibility: visible
+}
+
+.questionContainer {
+    visibility: hidden
+}
+
+.start-button {
+    display: flex;
+    justify-content: center;
+}
+
+
+
