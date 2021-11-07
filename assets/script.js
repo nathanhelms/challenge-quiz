@@ -1,13 +1,12 @@
-
-
-//hide and show the question thing 
-
-var startButton = document.querySelector('#startButton')
+var startButton = document.querySelector("#startButton")
 var timer = 75;
-var timerText = document.getElementById("#timer")
+var timerText = document.getElementById("timer")
 
 var introContainerEl = document.getElementsByClassName("introContainer")[0]
 var questionContainerEl = document.getElementsByClassName("questionContainer")[0]
+var finalResultsContainerEl = document.getElementsByClassName("finalResults")[0]
+var finalScore = document.getElementsByClassName("final-score")[0]
+var currentQuestionIndex = 0
 
 var questionEl = document.getElementById("questionText")
 var option1El = document.getElementById("option1")
@@ -16,14 +15,11 @@ var option3El = document.getElementById("option3")
 var option4El = document.getElementById("option4")
 var option5El = document.getElementById("option5")
 
+var initialsSubmit = document.getElementById("initials-submit")
 
+var correctIncorrectTextEl = document.getElementsByClassName("correct-incorrect-text")[0]
 
-
-
-
-
-
-
+//QUESTIONS
 
 var questionArray = [
   {
@@ -32,28 +28,78 @@ var questionArray = [
     correctAnswer: "Mercury"
   },
   {
-    question: "",
-    answers: "",
-    correctAnswer: ""
+    question: "Which country produces the most coffee in the world?",
+    answers: ["Venezuela", "Australia", "Brazil", "Mexico", "India"],
+    correctAnswer: "Brazil"
+  },
+  {
+    question: "What is the painting “La Gioconda” more usually known as?",
+    answers: ["The Mona Lisa", "La Guernica", "The Kiss", "Starry Night", "The Scream"],
+    correctAnswer: "The Mona Lisa"
+  },
+  {
+    question: "How much did the original Chewbacca costume weigh?",
+    answers: ["5 lbs", "12 lbs", "16 lbs", "20 lbs", "8 lbs"],
+    correctAnswer: "8 lbs"
+  },
+  {
+    question: "What language has the most words? ",
+    answers: ["French", "English", "Spanish", "Latin", "Chinese"],
+    correctAnswer: "English" 
   }
 ]
 
+//LEADERBOARD
+
+function finalResults() {
+  questionContainerEl.style.visibility = "hidden";
+  finalResultsContainerEl.style.visibility = "visible";
+  finalScore.innerHTML = timer
+  onclick.initialsSubmit = leaderboardStorage
+  console.log("did this work?")
+}
+
+//STORE LEADERBOARD STUFF
+
+function leaderboardStorage() {
+  localStorage.setItem("highscore", leaderboardStorage)
+}
+
+
+//QUESTION SWITCHER
 
 function questionSwitcher(answer) {
-};
 
+  currentQuestionIndex++
+
+  if (currentQuestionIndex >= 5) {
+    console.log("all done!")
+    finalResults();
+  } else if (answer === questionArray[currentQuestionIndex].correctAnswer) {
+    correctIncorrectTextEl.innerHTML = "Correct!"
+  } else {
+    correctIncorrectTextEl.innerHTML = "Wrong!"
+    timer -= 10
+  }
+
+
+  
+  questionIndex() 
+
+
+};
 
 //QUIZ
 
 function startQuiz() {
   introContainerEl.style.visibility = "hidden";
   questionContainerEl.style.visibility = "visible";
-  questionIndex(0);
+  questionIndex();
   timeout();
 }
 
-function questionIndex(currentQuestionIndex) {
-  var currentQuestion = questionArray[currentQuestionIndex].question
+function questionIndex() {
+  var currentQuestion = questionArray[currentQuestionIndex].question //////////////////
 
   questionEl.innerHTML = currentQuestion
   option1El.innerHTML = questionArray[currentQuestionIndex].answers[0]
@@ -63,14 +109,22 @@ function questionIndex(currentQuestionIndex) {
   option5El.innerHTML = questionArray[currentQuestionIndex].answers[4]
   console.log(questionIndex)
 
-  option1El.onclick = function() {questionSwitcher(questionArray[currentQuestionIndex].answers[0])};
-
+  option1El.onclick = function() {
+    questionSwitcher(questionArray[currentQuestionIndex].answers[0])
+  };
+  option2El.onclick = function() {
+    questionSwitcher(questionArray[currentQuestionIndex].answers[1])
+  };
+  option3El.onclick = function() {
+    questionSwitcher(questionArray[currentQuestionIndex].answers[2])
+  };
+  option4El.onclick = function() {
+    questionSwitcher(questionArray[currentQuestionIndex].answers[3])
+  };
+  option5El.onclick = function() {
+    questionSwitcher(questionArray[currentQuestionIndex].answers[4])
+  };  //////////////////////
 }
-
-
-
-
-
 
 //TIMER
 
@@ -84,13 +138,6 @@ function timeout() {
     setTimeout(timeout, 1000);
   }
 }
-
-
-
-
-
-
-
 
 //BUTTON
 
