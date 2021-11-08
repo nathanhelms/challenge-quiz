@@ -55,15 +55,12 @@ function finalResults() {
   questionContainerEl.style.visibility = "hidden";
   finalResultsContainerEl.style.visibility = "visible";
   finalScore.innerHTML = timer
-  onclick.initialsSubmit = leaderboardStorage()
+  onclick.initialsSubmit = /////////////
   console.log("did this work?")
 }
 
 //STORE LEADERBOARD STUFF
 
-function leaderboardStorage() {
-  localStorage.setItem("highscore", leaderboardStorage)
-}
 
 
 //QUESTION SWITCHER
@@ -140,6 +137,22 @@ function timeout() {
     setTimeout(timeout, 1000);
   }
 }
+
+
+var data = {
+  score: timer,
+  initials: ""
+}
+
+/*
+
+localStorage.setItem("score", JSON.stringify(data))
+
+var scoreData = localStorage.getItem('score')
+var parsedScoreData = JSON.parse(scoreData)
+onsole.log(parsedScoreData.initials + ' ' + parsedScoreData.score)
+
+*/
 
 //BUTTON
 
