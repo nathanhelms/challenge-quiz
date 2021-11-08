@@ -55,7 +55,7 @@ function finalResults() {
   questionContainerEl.style.visibility = "hidden";
   finalResultsContainerEl.style.visibility = "visible";
   finalScore.innerHTML = timer
-  onclick.initialsSubmit = leaderboardStorage
+  onclick.initialsSubmit = leaderboardStorage()
   console.log("did this work?")
 }
 
@@ -70,19 +70,21 @@ function leaderboardStorage() {
 
 function questionSwitcher(answer) {
 
+if (answer === questionArray[currentQuestionIndex].correctAnswer) { 
+  console.log("else if test")
+  correctIncorrectTextEl.innerHTML = "Correct!"
+} else {
+  correctIncorrectTextEl.innerHTML = "Wrong!"
+  timer -= 10
+}
+
   currentQuestionIndex++
 
   if (currentQuestionIndex >= 5) {
-    console.log("all done!")
     finalResults();
-  } else if (answer === questionArray[currentQuestionIndex].correctAnswer) {
-    correctIncorrectTextEl.innerHTML = "Correct!"
-  } else {
-    correctIncorrectTextEl.innerHTML = "Wrong!"
-    timer -= 10
-  }
+  };
 
-
+  
   
   questionIndex() 
 
@@ -99,7 +101,7 @@ function startQuiz() {
 }
 
 function questionIndex() {
-  var currentQuestion = questionArray[currentQuestionIndex].question //////////////////
+  var currentQuestion = questionArray[currentQuestionIndex].question
 
   questionEl.innerHTML = currentQuestion
   option1El.innerHTML = questionArray[currentQuestionIndex].answers[0]
@@ -123,7 +125,7 @@ function questionIndex() {
   };
   option5El.onclick = function() {
     questionSwitcher(questionArray[currentQuestionIndex].answers[4])
-  };  //////////////////////
+  };  
 }
 
 //TIMER
